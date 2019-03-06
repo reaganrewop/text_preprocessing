@@ -1,7 +1,13 @@
 import re
 from nltk.corpus import stopwords
-import spacy
+import spacy, nltk
+from nltk.stem import WordNetLemmatizer
 
+
+try:
+    nltk.data.find('wordnet')
+except LookupError:
+    nltk.download('wordnet')
 
 nlp = spacy.load("en")
 stop_words_spacy = list(nlp.Defaults.stop_words)
@@ -63,4 +69,19 @@ def remove_stopwords(sentence):
         for word in words:
             if word in stop_words:
                 sentence = sentence.replace(" " + word + " ", " ")
+    return sentence
+
+
+def lemmatization(sentence):
+    '''
+    Description : do Lemmatization.
+    input : A single sentence as a string.
+    output : A string with words lemmatized.
+    '''
+    lemmatizer = WordNetLemmatizer()
+    words = sentence.split(' ')
+    if words:
+        for word in words:
+            if word == lemmatizer.lemmatize(word):
+                sentence = sentence.replace(word, lemmatizer.lemmatize(word))
     return sentence

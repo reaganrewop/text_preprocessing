@@ -1,6 +1,6 @@
 import nltk
 import nltk.data
-from text_preprocessing.util import expand_contractions, unkown_punct, remove_number, remove_stopwords
+from text_preprocessing.util import expand_contractions, unkown_punct, remove_number, remove_stopwords,lemmatization
 
 
 try:
@@ -11,7 +11,7 @@ except LookupError:
 sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 
 
-def preprocess(text):
+def preprocess(text,lemma=False):
     '''
     Description: Does all the basic pre-processing.
     Input: Set of sentence(s) as a string.
@@ -24,6 +24,8 @@ def preprocess(text):
             mod_sent = unkown_punct(mod_sent)
             mod_sent = remove_number(mod_sent)
             mod_sent = remove_stopwords(mod_sent)
+            if lemma:
+                mod_sent = lemmatization(mod_sent)
             sentence.remove(sent)
             sentence.insert(index, mod_sent)
         return sentence
