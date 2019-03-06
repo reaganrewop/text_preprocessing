@@ -46,8 +46,9 @@ def remove_number(sentence):
     input : A single sentence as a string.
     output : A string.
     '''
-    sentence = re.sub("\ \d+\ ", " XnumberX ", sentence)
-    return sentence
+    sentence = re.sub("\ \d+\ ", " XnumberX ", " " + sentence + " ")
+    sentence = re.sub("\ \d+\ ", " XnumberX ", " " + sentence + " ")
+    return sentence[2:-2]
 
 
 def remove_stopwords(sentence):
