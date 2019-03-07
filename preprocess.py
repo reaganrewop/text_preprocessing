@@ -7,11 +7,12 @@ try:
     nltk.data.find('tokenizers/punkt')
 except LookupError:
     nltk.download('punkt')
-
+    
+    
 sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 
 
-def preprocess(text,lemma=False,stop_words=True):
+def preprocess(text,lemma=False,stop_words=True,word_tokenize=False):
     '''
     Description: Does all the basic pre-processing.
     Input: Set of sentence(s) as a string.
@@ -27,6 +28,8 @@ def preprocess(text,lemma=False,stop_words=True):
                 mod_sent = remove_stopwords(mod_sent)
             if lemma:
                 mod_sent = lemmatization(mod_sent)
+            if word_tokenize:
+                mod_sent = nltk.word_tokenize(mod_sent)
             sentence.remove(sent)
             sentence.insert(index, mod_sent)
         return sentence
