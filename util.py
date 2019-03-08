@@ -34,7 +34,7 @@ def expand_contractions(sentence):
     return sentence
 
 
-def unkown_punct(sentence):
+def unkown_punct(sentence, remove_punct):
     '''
     Description : remove punctuation.
     input : A single sentence as a string.
@@ -42,7 +42,8 @@ def unkown_punct(sentence):
     '''
     for p in punct:
         if p in sentence:
-            sentence = sentence.replace(p, '')
+            if not remove_punct and p not in {',','.','?'}:
+                sentence = sentence.replace(p, '')
     return sentence
 
 
@@ -85,4 +86,3 @@ def lemmatization(sentence):
             if word == lemmatizer.lemmatize(word):
                 sentence = sentence.replace(word, lemmatizer.lemmatize(word))
     return sentence
-
