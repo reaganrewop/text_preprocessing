@@ -74,9 +74,9 @@
   
   >[
   
-  > [('World', 'NOUN')],
+   >[ ('World', 'NOUN') ],
   
-  > [('basic', 'ADJ'), ('package', 'NOUN'),('cleaning', 'VERB'),('text', 'NOUN'),('created', 'VERB'),'XnumberX', 'PROPN')]
+   >[ ('basic', 'ADJ'), ('package', 'NOUN'), ('cleaning', 'VERB'), ('text', 'NOUN'), ('created', 'VERB') ]
   
   >]
 
