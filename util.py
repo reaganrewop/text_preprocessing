@@ -9,7 +9,7 @@ try:
 except LookupError:
     nltk.download('wordnet')
 
-nlp = spacy.load("en")
+nlp = spacy.load("en_core_web_sm")
 stop_words_spacy = list(nlp.Defaults.stop_words)
 stop_words_nltk = stopwords.words('english')
 
@@ -42,7 +42,11 @@ def unkown_punct(sentence, remove_punct):
     '''
     for p in punct:
         if p in sentence:
+<<<<<<< HEAD
+            if (remove_punct) or (not remove_punct  and p not in {',', '.', '?'}):
+=======
             if not remove_punct and p not in {',','.','?'}:
+>>>>>>> 9f5b178... remove_punct param
                 sentence = sentence.replace(p, '')
     return sentence
 
@@ -86,3 +90,20 @@ def lemmatization(sentence):
             if word == lemmatizer.lemmatize(word):
                 sentence = sentence.replace(word, lemmatizer.lemmatize(word))
     return sentence
+<<<<<<< HEAD
+
+
+def get_pos(sentence):
+    '''
+    Description : get pos tags of word tokenized sentence
+    input : A single string sentence.
+    output : A list of sentence where each sentence contains a list of tuple with word, POS.
+    '''
+    sentence_pos = []
+    doc = nlp(sentence)
+
+    for token in doc:
+        sentence_pos.append((token.text, token.pos_))
+    return sentence_pos
+=======
+>>>>>>> 9f5b178... remove_punct param
