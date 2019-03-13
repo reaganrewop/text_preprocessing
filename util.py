@@ -101,7 +101,7 @@ def get_pos(sentence):
     return sentence_pos
 
 
-def get_filtered_pos(sentence, filter_pos=['ADJ', 'VERB', 'NOUN', 'PROPN', 'FW']]):
+def get_filtered_pos(sentence, filter_pos=['ADJ', 'VERB', 'NOUN', 'PROPN', 'FW']):
     '''
     Description : Filter POS with respect to the given list.
     Input : A list of sentence, where sentence consist of \
@@ -114,7 +114,7 @@ def get_filtered_pos(sentence, filter_pos=['ADJ', 'VERB', 'NOUN', 'PROPN', 'FW']
         for sent in sentence:
             sentence_pos = []
             for word in sent:
-                if word[1] in filter_pos:
+                if word[1] in filter_pos and word[0] != 'XnumberX':
                     sentence_pos.append(word)
             text_pos.append(sentence_pos)
         return text_pos
