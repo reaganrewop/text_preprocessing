@@ -42,11 +42,7 @@ def unkown_punct(sentence, remove_punct):
     '''
     for p in punct:
         if p in sentence:
-<<<<<<< HEAD
-            if (remove_punct) or (not remove_punct  and p not in {',', '.', '?'}):
-=======
-            if not remove_punct and p not in {',','.','?'}:
->>>>>>> 9f5b178... remove_punct param
+            if not remove_punct and p not in {',', '.', '?'}:
                 sentence = sentence.replace(p, '')
     return sentence
 
@@ -90,7 +86,6 @@ def lemmatization(sentence):
             if word == lemmatizer.lemmatize(word):
                 sentence = sentence.replace(word, lemmatizer.lemmatize(word))
     return sentence
-<<<<<<< HEAD
 
 
 def get_pos(sentence):
@@ -105,5 +100,3 @@ def get_pos(sentence):
     for token in doc:
         sentence_pos.append((token.text, token.pos_))
     return sentence_pos
-=======
->>>>>>> 9f5b178... remove_punct param

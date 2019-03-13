@@ -13,12 +13,8 @@ except LookupError:
 sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 
 
-<<<<<<< HEAD
 def preprocess(text, lemma=False, stop_words=True, word_tokenize=False,
                remove_punct=True, pos=False):
-=======
-def preprocess(text, lemma=False, stop_words=True, word_tokenize=False, remove_punct=True):
->>>>>>> 9f5b178... remove_punct param
     '''
     Description: Does all the basic pre-processing.
     Input: Set of sentence(s) as a string.
