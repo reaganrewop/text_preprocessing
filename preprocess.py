@@ -1,7 +1,7 @@
 import nltk
 import nltk.data
 from text_preprocessing.util import expand_contractions, unkown_punct, \
-    remove_number, remove_stopwords, lemmatization, get_pos
+    remove_number, remove_stopwords, lemmatization, get_pos, get_filter_pos
 
 
 try:
@@ -13,7 +13,7 @@ except LookupError:
 sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 
 
-def preprocess(text, lemma=False, stop_words=True, word_tokenize=False,
+def preprocess(text, lemma=False, stop_words=True, word_tokenize=False, \
                remove_punct=True, pos=False):
     '''
     Description: Does all the basic pre-processing.

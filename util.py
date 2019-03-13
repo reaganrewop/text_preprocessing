@@ -64,7 +64,6 @@ def remove_stopwords(sentence):
     input : A single sentence as a string.
     output : A string without stopwords.
     '''
-    stop_words
     words = sentence.split(' ')
     if words:
         for word in words:
@@ -100,3 +99,23 @@ def get_pos(sentence):
     for token in doc:
         sentence_pos.append((token.text, token.pos_))
     return sentence_pos
+
+
+def get_filter_pos(sentence, filter_pos=[]):
+    '''
+    Description : Filter POS with respect to the given list.
+    Input : A list of sentence, where sentence consist of \
+            list of tuple with word,pos tag.
+    Output : return the filtered POS tag for pos tags\
+            which are present in filter_pos
+    '''
+    text_pos = []
+    if filter_pos:
+        for sent in sentence:
+            sentence_pos = []
+            for word in sent:
+                if word[1] in filter_pos:
+                    sentence_pos.append(word)
+                    text_pos.append(sentence_pos)
+        return text_pos
+    return sentence
