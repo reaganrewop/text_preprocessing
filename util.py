@@ -1,9 +1,9 @@
+from __future__ import unicode_literals
 import re
 from nltk.corpus import stopwords
 import spacy, nltk
 from nltk.stem import WordNetLemmatizer
 import en_core_web_sm
-from __future__ import unicode_literals
 
 try:
     nltk.data.find('wordnet')
