@@ -16,8 +16,7 @@ try:
     stop_words_nltk = stopwords.words('english')
 except Exception:
     nltk.download('stopwords')
-
-stop_words_nltk = stopwords.words('english')
+    stop_words_nltk = stopwords.words('english')
 
 stop_words_spacy = list(
     """
