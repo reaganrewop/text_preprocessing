@@ -19,7 +19,7 @@ except Exception:
 
 stop_words_nltk = stopwords.words('english')
 
-stop_words_spacy = set(
+stop_words_spacy = list(
     """
 a about above across after afterwards again against all almost alone along
 already also although always am among amongst amount an and another any anyhow
