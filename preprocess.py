@@ -2,7 +2,8 @@ import nltk
 import nltk.data
 from text_preprocessing.util import expand_contractions, unkown_punct, \
     remove_number, remove_stopwords, lemmatization, get_pos, get_filtered_pos
-
+from itertools import chain
+from nltk import sent_tokenize
 
 try:
     nltk.data.find('tokenizers/punkt')
@@ -39,6 +40,8 @@ def preprocess(text, lemma=False, stop_words=True, word_tokenize=False, \
                 mod_sent = nltk.word_tokenize(mod_sent)
             sentence.remove(sent)
             sentence.insert(index, mod_sent)
+        mod_sents = [sent_tokenize(s) for s in sentence]
+        sentence = list(chain.from_iterable(mod_sents))
         if pos:
             return sentence, pos_text
         return sentence

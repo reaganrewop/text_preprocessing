@@ -115,8 +115,11 @@ def unkown_punct(sentence, remove_punct):
     '''
     for p in punct:
         if p in sentence:
-            if not remove_punct and p not in {',', '.', '?'}:
-                sentence = sentence.replace(p, '')
+            if remove_punct:
+                sentence = sentence.replace(p, ' ')
+            elif p not in {',', '.', '?'}:
+                sentence = sentence.replace(p, ' ')
+    sentence = sentence.replace('\n', ' ')
     return sentence
 
 
