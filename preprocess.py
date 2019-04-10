@@ -40,8 +40,8 @@ def preprocess(text, lemma=False, stop_words=True, word_tokenize=False, \
                 mod_sent = nltk.word_tokenize(mod_sent)
             sentence.remove(sent)
             sentence.insert(index, mod_sent)
-        mod_sents = [sent_tokenize(s) for s in sentence]
-        sentence = list(chain.from_iterable(mod_sents))
         if pos:
             return sentence, pos_text
+        mod_sents = [sent_tokenize(s) for s in sentence]
+        sentence = list(chain.from_iterable(mod_sents))
         return sentence
