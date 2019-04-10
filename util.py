@@ -100,10 +100,16 @@ def expand_contractions(sentence):
     output : A expanded contraction sentence as string
     '''
     words = sentence.split(' ')
+    new_word = ""
     if words:
         for word in words:
             if not not contraction_mapping.get(word):
                 sentence = sentence.replace(word, contraction_mapping[word])
+            if "'s" in word or "’s" in word:
+                new_word = word.replace("'s"," is")
+                if new_word == word:
+                    new_word = word.replace("’s","s")
+                sentence = sentence.replace(word, new_word)
     return sentence
 
 
@@ -116,9 +122,15 @@ def unkown_punct(sentence, remove_punct):
     for p in punct:
         if p in sentence:
             if remove_punct:
-                sentence = sentence.replace(p, ' ')
+                if p=="-":
+                    sentence = sentence.replace(p, ' ')
+                else:
+                    sentence = sentence.replace(p, '')
             elif p not in {',', '.', '?'}:
-                sentence = sentence.replace(p, ' ')
+                if p=="-":
+                    sentence = sentence.replace(p, ' ')
+                else:
+                    sentence = sentence.replace(p, '')
     sentence = sentence.replace('\n', ' ')
     return sentence
 
@@ -129,8 +141,8 @@ def remove_number(sentence):
     input : A single sentence as a string.
     output : A string.
     '''
-    sentence = re.sub("\ \d+\ ", " XnumberX ", " " + sentence + " ")
-    sentence = re.sub("\ \d+\ ", " XnumberX ", " " + sentence + " ")
+    sentence = re.sub("\d+\.+\d+", "XnumberX", " " + sentence + " ")
+    sentence = re.sub("\d+", "XnumberX", " " + sentence + " ")
     return sentence[2:-2]
 
 
