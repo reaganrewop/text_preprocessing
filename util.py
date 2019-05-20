@@ -1,3 +1,18 @@
+# -*- coding: utf-8 -*-
+# ---
+# jupyter:
+#   jupytext:
+#     text_representation:
+#       extension: .py
+#       format_name: light
+#       format_version: '1.3'
+#       jupytext_version: 0.8.6
+#   kernelspec:
+#     display_name: Python 3
+#     language: python
+#     name: python3
+# ---
+
 from __future__ import unicode_literals
 import re
 from nltk.corpus import stopwords
@@ -119,6 +134,7 @@ def unkown_punct(sentence, remove_punct):
     input : A single sentence as a string.
     output : A string.
     '''
+    sentence = re.sub('<.*?>', '', sentence)
     for p in punct:
         if p in sentence:
             if remove_punct:
