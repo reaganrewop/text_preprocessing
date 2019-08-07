@@ -223,3 +223,6 @@ def get_filtered_pos(sentence, filter_pos=['ADJ', 'VERB', 'NOUN', 'PROPN', 'FW']
             text_pos.append(sentence_pos)
         return text_pos
     return sentence
+
+def clean_extra_filters(sentence):
+    return re.sub("[\W]"," ",sentence)

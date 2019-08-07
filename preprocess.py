@@ -15,7 +15,8 @@
 import nltk
 import nltk.data
 from text_preprocessing.util import expand_contractions, unkown_punct, \
-    remove_number, remove_stopwords, lemmatization, get_pos, get_filtered_pos
+    remove_number, remove_stopwords, lemmatization, get_pos, get_filtered_pos, \
+    clean_extra_filters
 from itertools import chain
 from nltk import sent_tokenize
 
@@ -29,7 +30,7 @@ sent_detector = nltk.data.load('tokenizers/punkt/english.pickle')
 
 
 def preprocess(text, lemma=False, stop_words=True, word_tokenize=False, \
-               remove_punct=True, pos=False):
+               remove_punct=True, pos=False, extra_filters=False):
     '''
     Description: Does all the basic pre-processing.
     Input: Set of sentence(s) as a string.
@@ -46,6 +47,8 @@ def preprocess(text, lemma=False, stop_words=True, word_tokenize=False, \
                 mod_sent = remove_stopwords(mod_sent)
             if lemma:
                 mod_sent = lemmatization(mod_sent)
+            if extra_filters:
+                mod_sent = clean_extra_filters(mod_sent)
             if pos:
                 mod_sent_pos = mod_sent[:]
                 mod_sent_pos = get_pos(mod_sent_pos)
