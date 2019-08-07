@@ -13,6 +13,7 @@
    + return word tokenized response (word_tokenize=False/True)
    + remove punctuations (remove_punct=True/False)
    + do POS tagging (pos=False/True)
+   + do extra cleaning, mostly for web scraped data (extra_filters=False/True)
    
 ## Installation
    + Clone the repo under your root project directory.
