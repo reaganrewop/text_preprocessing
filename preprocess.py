@@ -103,7 +103,7 @@ class Preprocessor:
                     )
         return sentence
 
-    def get_pos(self, sentence) -> list[tuple(str, str)]:
+    def get_pos(self, sentence) -> List[Tuple[str, str]]:
         """
         Description : get pos tags of word tokenized sentence
         input : A single string sentence.
@@ -164,7 +164,7 @@ class Preprocessor:
         word_tokenize=False,
         remove_punct=False,
         mask_numbers=False,
-        pos=False,
+        pos=False
     ) -> Union[List[str], Tuple[List[str], List[str]]]:
         """
         Description: Does all the basic pre-processing.
