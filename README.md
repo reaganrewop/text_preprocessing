@@ -24,7 +24,7 @@
    
    + performs all the default functionalities that are mentioned above.
       
-      `preprocess(sentence :str or :list[str], lemma [default=False] :bool,  stop_words [default=False] :bool,  word_tokenize [default=False] :bool,  remove_punct [default=False] :bool,  pos [default=False] :bool, mask_numbers [default=False] :bool)`
+      `get_preprocessed_text(sentence :str or :list[str], lemma [default=False] :bool,  stop_words [default=False] :bool,  word_tokenize [default=False] :bool,  remove_punct [default=False] :bool,  pos [default=False] :bool, mask_numbers [default=False] :bool)`
       
       + Mandatory Args:
          + sentence: string of sentence(s) or list of sentence(s)
