@@ -1,9 +1,28 @@
-import sys
-if not not globals(  ).get('init_modules'):
-    # second or subsequent run: remove all but initially loaded modules
-    for m in sys.modules.keys(  ):
-        if m not in init_modules:
-            del(sys.modules[m])
+from .preprocess import Preprocessor
+import os
+import nltk
+import nltk.data
+
+if os.path.isdir("/tmp/nltk_data"):
+    nltk.data.path.append("/tmp/nltk_data")
+    try:
+        nltk.data.find("wordnet")
+        nltk.data.find("stopwords")
+        nltk.data.find("tokenizers/punkt/PY3/english.pickle")
+
+    except LookupError:
+        nltk.download("wordnet", download_dir="/tmp/nltk_data")
+        nltk.download("stopwords", download_dir="/tmp/nltk_data")
+        nltk.download(
+            "averaged_perceptron_tagger", download_dir="/tmp/nltk_data"
+        )
+        nltk.download("punkt")
+
 else:
-    # first run: find out which modules were initially loaded
-    init_modules = sys.modules.keys(  )
+    nltk.download("wordnet", download_dir="/tmp/nltk_data")
+    nltk.download("stopwords", download_dir="/tmp/nltk_data")
+    nltk.download(
+        "averaged_perceptron_tagger", download_dir="/tmp/nltk_data"
+    )
+    nltk.download("punkt")
+    nltk.data.path.append("/tmp/nltk_data")
