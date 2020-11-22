@@ -1,7 +1,7 @@
-from .preprocess import Preprocessor
 import os
 import nltk
 import nltk.data
+
 
 if os.path.isdir("/tmp/nltk_data"):
     nltk.data.path.append("/tmp/nltk_data")
@@ -16,7 +16,8 @@ if os.path.isdir("/tmp/nltk_data"):
         nltk.download(
             "averaged_perceptron_tagger", download_dir="/tmp/nltk_data"
         )
-        nltk.download("punkt")
+        nltk.download("punkt", download_dir="/tmp/nltk_data")
+
 
 else:
     nltk.download("wordnet", download_dir="/tmp/nltk_data")
@@ -24,5 +25,6 @@ else:
     nltk.download(
         "averaged_perceptron_tagger", download_dir="/tmp/nltk_data"
     )
-    nltk.download("punkt")
+    nltk.download("punkt", download_dir="/tmp/nltk_data")
     nltk.data.path.append("/tmp/nltk_data")
+from .preprocess import Preprocessor
