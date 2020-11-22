@@ -40,7 +40,7 @@ class Preprocessor:
         self.chunker = nltk.RegexpParser(self.grammer)
 
     def get_tokenized_sent(self, para_text) -> List[str]:
-        sentences = sent_detector.tokenize(para_text.strip())
+        sentences = sent_detector.tokenize(para_text)
         return sentences
 
     def expand_contractions(self, sentence) -> str:
@@ -172,13 +172,11 @@ class Preprocessor:
             flags=re.UNICODE,
         )
         text = emoji_pattern.sub(r"", text)
+        #print (text)
         if mask_numbers:
             text = self.remove_number(text)
         text = re.sub(self.web_url_regex, "__url__", text)
         #text = text.replace('__url__', '').replace('__NUMBER__', '')
-        if add_breaks:
-            text = text.replace("\\n\\n", " __PAGEBREAK__ ")
-            text = text.replace("\\n", " __SENTENCEBREAK__ ")
         text = (
             text.replace("\\n", "")
             .replace("’", "'")
@@ -215,6 +213,9 @@ class Preprocessor:
         Output: List of pre-processed sentences.
         """
         if isinstance(text, str):
+            #if add_breaks:
+                #text = text.replace("\n\n", " __PAGEBREAK__ ")
+                #text = text.replace("\n", " __SENTENCEBREAK__ ")
             sentences = self.get_tokenized_sent(text)
         elif isinstance(text, list):
             sentences = text
@@ -222,7 +223,6 @@ class Preprocessor:
             raise Exception(
                 "Unknown type of input. Please, pass a string or list of sentences."
             )
-
         preprocessed_text = []
         pos_tagged_sents = []
         for index, sent in enumerate(sentences):
