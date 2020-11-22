@@ -93,7 +93,7 @@ class Preprocessor:
                     # shouldn't remove "high-class" kind of tokens
                     sentence = re.sub(r'['+ p  + ']' + '['+ p  + ']+', '', sentence)
         # removes full stop
-        sentence = re.sub(r'[.]+', '', sentence)
+        sentence = re.sub(r'[.][.]+', '', sentence)
         return sentence
 
     def remove_number(self, sentence) -> str:
@@ -102,6 +102,7 @@ class Preprocessor:
         input : A single sentence as a string.
         output : A string.
         """
+        sentence = re.sub(r"\d+[:.\d-]+\d+", "__NUMBER__", " " + sentence + " ")
         sentence = re.sub(r"\d+\.+\d+", "__NUMBER__", " " + sentence + " ")
         sentence = re.sub(r"\d+", "__NUMBER__", " " + sentence + " ")
         return sentence[2:-2]
@@ -154,12 +155,13 @@ class Preprocessor:
             sentence_pos.append(tags)
         return sentence_pos
 
-    def clean_text(self, text, remove_punct=False, mask_numbers=False):
+    def clean_text(self, text, remove_punct=False, mask_numbers=False, add_breaks=False):
         """
         Description : Clean the text with common preprocessing rules.
         input : A single string sentence.
         output : Cleaned string of text.
         """
+        text = self.unkown_punct(text, remove_punct)
         emoji_pattern = re.compile(
             "["
             "\U0001F600-\U0001F64F"
@@ -170,15 +172,13 @@ class Preprocessor:
             flags=re.UNICODE,
         )
         text = emoji_pattern.sub(r"", text)
-        text = self.expand_contractions(text)
         if mask_numbers:
             text = self.remove_number(text)
         text = re.sub(self.web_url_regex, "__url__", text)
-        #specific
-        if '__url__' in text:
-            return ''
-        text = text.replace('__url__', '').replace('__NUMBER__', '')
-        text = self.unkown_punct(text, remove_punct)
+        #text = text.replace('__url__', '').replace('__NUMBER__', '')
+        if add_breaks:
+            text = text.replace("\\n\\n", " __PAGEBREAK__ ")
+            text = text.replace("\\n", " __SENTENCEBREAK__ ")
         text = (
             text.replace("\\n", "")
             .replace("’", "'")
@@ -194,6 +194,7 @@ class Preprocessor:
         text = re.sub(" +", " ", text)
         text = text.replace("\t", "")
         text = text.replace("\n", "")
+        text = self.expand_contractions(text)
         return text.strip()
 
     def get_preprocessed_text(
@@ -205,7 +206,8 @@ class Preprocessor:
         remove_punct=False,
         mask_numbers=False,
         pos=False,
-        sentence_quality=False
+        sentence_quality=False,
+        add_breaks=False,
     ) -> Union[List[str], Tuple[List[str], List[str]]]:
         """
         Description: Does all the basic pre-processing.
@@ -226,7 +228,7 @@ class Preprocessor:
         for index, sent in enumerate(sentences):
             mod_sent = []
             mod_sent_post = []
-            mod_sent = self.clean_text(sent, remove_punct, mask_numbers)
+            mod_sent = self.clean_text(sent, remove_punct, mask_numbers, add_breaks)
             if mod_sent != "":
                 if pos:
                     mod_sent_pos = mod_sent[:]
