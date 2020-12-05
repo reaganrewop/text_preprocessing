@@ -1,0 +1,9 @@
+README.md
+setup.py
+lawliet.egg-info/PKG-INFO
+lawliet.egg-info/SOURCES.txt
+lawliet.egg-info/dependency_links.txt
+lawliet.egg-info/top_level.txt
+text_processor/__init__.py
+text_processor/preprocess.py
+text_processor/util.py

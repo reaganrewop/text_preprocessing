@@ -1,0 +1,9 @@
+README.md
+setup.py
+text_processor/__init__.py
+text_processor/preprocess.py
+text_processor/util.py
+text_processor.egg-info/PKG-INFO
+text_processor.egg-info/SOURCES.txt
+text_processor.egg-info/dependency_links.txt
+text_processor.egg-info/top_level.txt
